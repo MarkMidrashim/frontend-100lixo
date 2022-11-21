@@ -1,0 +1,54 @@
+<section class="container">
+  <div class="multisteps-form mb-5">
+    <div class="row">
+      <div class="col-12 col-lg-8 mx-auto my-5">
+        <div class="multisteps-form__progress">
+          <button *ngFor="let step of steps; let i = index;"
+            [ngClass]="{'js-active' : selectedIndex === i || selectedIndex > i}"
+            class="multisteps-form__progress-btn"
+            type="button"
+            [title]="step.label"
+          >
+            <span>{{ step.label }}</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-12 col-lg-8 m-auto">
+        <ng-container [ngTemplateOutlet]="selected.content"></ng-container>
+        <footer class="button-row d-flex mt-4">
+          <button class="btn bg-gradient-light mb-0 js-btn-prev"
+            type="button"
+            title="Anterior"
+            *ngIf="selectedIndex !== 0"
+            cdkStepperPrevious
+          >
+            {{ btnBackText }}
+          </button>
+          <button class="btn bg-gradient-dark ms-auto mb-0 js-btn-next"
+            type="button"
+            title="Próximo"
+            (click)="validateAndNextStep()"
+            *ngIf="selectedIndex + 1 !== steps.length"
+            [disabled]="selected?.stepControl?.invalid"
+          >
+            <!--  -->
+            {{ btnNextText }}
+          </button>
+          <button class="btn bg-gradient-dark ms-auto mb-0 js-btn-next"
+            type="button"
+            title="Finalizar"
+            *ngIf="selectedIndex + 1 === steps.length"
+            (click)="validateAndFinishStepper()"
+            [disabled]="selected?.stepControl?.invalid"
+          >
+            {{ btnFinishText }}
+          </button>
+        </footer>
+      </div>
+    </div>
+
+  </div>
+</section>

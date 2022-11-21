@@ -1,0 +1,16 @@
+{
+  "$schema": "../../../node_modules/ng-packagr/ng-package.schema.json",
+  "dest": "../../../dist/100lixo-lib/ngx-auth",
+  "deleteDestPath": false,
+  "lib": {
+    "entryFile": "src/public-api.ts",
+    "umdModuleIds": {
+      "@100lixo-lib/ngx-auth": "@100lixo-lib/ngx-auth",
+      "ngx-cookie-service": "ngx-cookie-service"
+    }
+  },
+  "allowedNonPeerDependencies": [
+    "@100lixo-lib/ngx-auth",
+    "ngx-cookie-service"
+  ]
+}

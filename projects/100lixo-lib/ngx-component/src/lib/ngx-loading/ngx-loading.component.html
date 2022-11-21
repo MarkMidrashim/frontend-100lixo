@@ -1,0 +1,18 @@
+<div
+  class="fsg-loading-backdrop"
+  [ngClass]="{ 'fsg-loading-fixed': _isFixed, 'fsg-loading-absolute': !_isFixed }"
+></div>
+<div
+  class="fsg-loading-ui"
+  [ngClass]="{ 'fsg-loading-fixed': _isFixed, 'fsg-loading-absolute': !_isFixed }"
+>
+  <div class="loading-message fluig-style-guide">
+    <div class="well fs-no-margin" *ngIf="message">
+      <span class="loading-text">
+        {{ message }}
+      </span>
+      <span class="loading-img"></span>
+    </div>
+    <span class="loading-img" *ngIf="!message"></span>
+  </div>
+</div>

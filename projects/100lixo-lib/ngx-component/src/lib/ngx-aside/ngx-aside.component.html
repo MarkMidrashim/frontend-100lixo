@@ -1,0 +1,43 @@
+<div class="sidenav-header">
+  <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute right-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav">
+  </i>
+  <a class="navbar-brand d-flex justify-content-center" routerLink="/dashboard">
+    <img src="assets/img/logo.png" class="navbar-brand-img" alt="100lixo">
+  </a>
+</div>
+<hr class="horizontal dark mt-5">
+<div class="collapse navbar-collapse  w-auto" id="sidenav-collapse-main">
+  <ul class="navbar-nav" *ngIf="asides; else loadingItens">
+    <li class="nav-item" *ngFor="let item of asides">
+      <a class="nav-link" [ngClass]="{'active': isCurrentRoute(item?.url)}" [routerLink]="item.url">
+        <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+          <i [class]="'fas fa-' + item.icon"></i>
+        </div>
+        <span class="nav-link-text ms-1">{{ item.label }}</span>
+      </a>
+    </li>
+  </ul>
+</div>
+<div class="sidenav-footer mx-3">
+  <div *ngIf="false" class="card card-background shadow-none card-background-mask-secondary" id="sidenavCard">
+    <div class="full-background" style="background-image: url('assets/img/curved-images/white-curved.jpg')"></div>
+    <div class="card-body text-start p-3 w-100">
+      <div class="icon icon-shape icon-sm bg-white shadow text-center mb-3 d-flex align-items-center justify-content-center border-radius-md">
+        <i class="ni ni-diamond text-dark text-gradient text-lg top-0" aria-hidden="true" id="sidenavCardIcon"></i>
+      </div>
+      <div class="docs-info">
+        <h6 class="text-white up mb-0">Need help?</h6>
+        <p class="text-xs font-weight-bold">Please check our docs</p>
+        <a href="https://www.creative-tim.com/learning-lab/bootstrap/license/100lixo" target="_blank" class="btn btn-white btn-sm w-100 mb-0">Documentation</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #loadingItens>
+  <ngx-skeleton-loader
+  [hidden]="loading"
+  count="4"
+  [theme]="{ 'border-radius': '40', height: '40px', padding: '20px !important' }"
+></ngx-skeleton-loader>
+</ng-template>

@@ -1,0 +1,20 @@
+<div class="fsg-form-field">
+  <div class="form-group" [class.has-danger]="control && control.invalid">
+    <label *ngIf="labelContent" [for]="for" class="control-label">
+      {{ labelContent }}
+      <small *ngIf="required">*</small>
+      <em *ngIf="tooltip || tooltipTemplate"
+        style="margin-left: .27rem !important"
+        class="fas fa-info-circle"
+        [title]="tooltipTemplate ? '' : tooltip"
+      ></em>
+    </label>
+    <small *ngIf="subtitle" class="fs-xs-padding-left">{{ subtitle }}</small>
+    <ng-content></ng-content>
+    <ng-container *ngFor="let message of validatorMessages">
+      <span *ngIf="control && control.hasError(message.validator)" class="invalid-feedback">
+        {{ message.message }}
+      </span>
+    </ng-container>
+  </div>
+</div>

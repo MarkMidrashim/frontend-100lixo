@@ -1,0 +1,79 @@
+<div class="row" >
+  <div class="col-6">
+    <!-- Geral -->
+    <div class="card h-100">
+      <div class="card-header">
+        <h4 [hidden]="!loading" class="text-center">Geral</h4>
+        <ngx-skeleton-loader
+          [hidden]="loading"
+          count="1"
+          [theme]="{ width: '20em', 'border-radius': '40', height: '40px' }"
+        ></ngx-skeleton-loader>
+        <hr class="horizontal gray-light">
+      </div>
+      <div class="card-body">
+        <ng-container *ngIf="pessoa; else loadingSkeleton">
+          <ul class="list-group" [hidden]="!loading">
+            <!--<li class="list-group-item border-0 ps-0 pt-0 text-sm">
+              <strong class="text-dark">Nome:</strong>&nbsp; {{ pessoa?.nome }}
+            </li>
+            <li class="list-group-item border-0 ps-0 text-sm">
+              <strong class="text-dark">Celular:</strong>&nbsp; {{ pessoa?.telefones?.celular }}
+            </li>
+            <li class="list-group-item border-0 ps-0 text-sm">
+              <strong class="text-dark">Email:</strong>&nbsp; {{ pessoa?.email }}
+            </li>
+            <li class="list-group-item border-0 ps-0 text-sm">
+              <strong class="text-dark">Situação:</strong>&nbsp;
+              <i [hidden]="!pessoa?.situacao" style="color: #82d616" class="fas fa-thumbs-up"></i>
+              <i [hidden]="pessoa?.situacao" style="color: #ea0606" class="fas fa-thumbs-down"></i>
+            </li>-->
+          </ul>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-6">
+    <!-- Endereço -->
+    <div class="card h-100">
+      <div class="card-header">
+        <h4 [hidden]="!loading" class="text-center">Endereço</h4>
+        <ngx-skeleton-loader
+          [hidden]="loading"
+          count="1"
+          [theme]="{ width: '20em', 'border-radius': '40', height: '40px' }"
+        ></ngx-skeleton-loader>
+        <hr class="horizontal gray-light">
+      </div>
+      <div class="card-body">
+        <ng-container *ngIf="pessoa; else loadingSkeleton">
+          <ul class="list-group" [hidden]="!loading">
+            <!--<li class="list-group-item border-0 ps-0 pt-0 text-sm">
+              <strong class="text-dark">CEP:</strong>&nbsp; {{ pessoa?.endereco?.cep }}
+            </li>
+            <li class="list-group-item border-0 ps-0 text-sm">
+              <strong class="text-dark">Logradouro:</strong>&nbsp;
+                {{ pessoa?.endereco?.logradouro }}, {{ pessoa?.endereco?.numero }}
+            </li>
+            <li class="list-group-item border-0 ps-0 text-sm">
+              <strong class="text-dark">Bairro:</strong>&nbsp; {{ pessoa?.endereco?.bairro }}
+            </li>
+            <li class="list-group-item border-0 ps-0 text-sm">
+              <strong class="text-dark">Cidade:</strong>&nbsp;
+                {{ pessoa?.endereco?.cidade }}/{{ pessoa?.endereco?.estado }}
+            </li>-->
+          </ul>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #loadingSkeleton>
+  <ngx-skeleton-loader
+    [hidden]="loading"
+    count="4"
+    [theme]="{ 'border-radius': '40', height: '40px' }"
+  ></ngx-skeleton-loader>
+</ng-template>

@@ -1,0 +1,363 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "projects",
+  "projects": {
+    "ngx-100lixo": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        },
+        "@schematics/angular:application": {
+          "strict": true
+        }
+      },
+      "root": "projects/ngx-100lixo",
+      "sourceRoot": "projects/ngx-100lixo/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "allowedCommonJsDependencies": [
+              "uuid"
+            ],
+            "outputPath": "dist/app-ngx-100lixo/dist",
+            "index": "projects/ngx-100lixo/src/index.html",
+            "main": "projects/ngx-100lixo/src/main.ts",
+            "polyfills": "projects/ngx-100lixo/src/polyfills.ts",
+            "tsConfig": "projects/ngx-100lixo/tsconfig.app.json",
+            "aot": true,
+            "assets": [
+              "projects/ngx-100lixo/src/favicon.ico",
+              "projects/ngx-100lixo/src/assets"
+            ],
+            "styles": [
+              "projects/ngx-100lixo/src/styles.scss"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/ngx-100lixo/src/environments/environment.ts",
+                  "with": "projects/ngx-100lixo/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "1mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kb",
+                  "maximumError": "4kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "ngx-100lixo:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "ngx-100lixo:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "ngx-100lixo:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-builders/jest:run",
+          "options": {
+            "polyfills": ["projects/ngx-100lixo/src/polyfills.ts"],
+            "tsConfig": "projects/ngx-100lixo/tsconfig.spec.json",
+            "assets": [
+              "projects/ngx-100lixo/src/favicon.ico",
+              "projects/ngx-100lixo/src/assets"
+            ],
+            "styles": [
+              "projects/ngx-100lixo/src/styles.scss"
+            ],
+            "scripts": []
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/ngx-100lixo/tsconfig.app.json",
+              "projects/ngx-100lixo/tsconfig.spec.json",
+              "e2e/tsconfig.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        },
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "e2e/protractor.conf.js",
+            "devServerTarget": "ngx-100lixo:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "ngx-100lixo:serve:production"
+            }
+          }
+        }
+      }
+    },
+    "@100lixo-lib/ngx-component": {
+      "projectType": "library",
+      "root": "projects/100lixo-lib/ngx-component",
+      "sourceRoot": "projects/100lixo-lib/ngx-component/src",
+      "prefix": "ngx",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "tsConfig": "projects/100lixo-lib/ngx-component/tsconfig.lib.json",
+            "project": "projects/100lixo-lib/ngx-component/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/100lixo-lib/ngx-component/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-builders/jest:run",
+          "options": {
+            "tsConfig": "projects/100lixo-lib/ngx-component/tsconfig.spec.json"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/100lixo-lib/ngx-component/tsconfig.lib.json",
+              "projects/100lixo-lib/ngx-component/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "@100lixo-lib/ngx-api": {
+      "projectType": "library",
+      "root": "projects/100lixo-lib/ngx-api",
+      "sourceRoot": "projects/100lixo-lib/ngx-api/src",
+      "prefix": "ngx",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "tsConfig": "projects/100lixo-lib/ngx-api/tsconfig.lib.json",
+            "project": "projects/100lixo-lib/ngx-api/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/100lixo-lib/ngx-api/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-builders/jest:run",
+          "options": {
+            "tsConfig": "projects/100lixo-lib/ngx-api/tsconfig.spec.json"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/100lixo-lib/ngx-api/tsconfig.lib.json",
+              "projects/100lixo-lib/ngx-api/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "@100lixo-lib/ngx-pipes": {
+      "projectType": "library",
+      "root": "projects/100lixo-lib/ngx-pipes",
+      "sourceRoot": "projects/100lixo-lib/ngx-pipes/src",
+      "prefix": "ngx",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "tsConfig": "projects/100lixo-lib/ngx-pipes/tsconfig.lib.json",
+            "project": "projects/100lixo-lib/ngx-pipes/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/100lixo-lib/ngx-pipes/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-builders/jest:run",
+          "options": {
+            "tsConfig": "projects/100lixo-lib/ngx-pipes/tsconfig.spec.json"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/100lixo-lib/ngx-pipes/tsconfig.lib.json",
+              "projects/100lixo-lib/ngx-pipes/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "@100lixo-lib/ngx-service": {
+      "projectType": "library",
+      "root": "projects/100lixo-lib/ngx-service",
+      "sourceRoot": "projects/100lixo-lib/ngx-service/src",
+      "prefix": "ngx",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "tsConfig": "projects/100lixo-lib/ngx-service/tsconfig.lib.json",
+            "project": "projects/100lixo-lib/ngx-service/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/100lixo-lib/ngx-service/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-builders/jest:run",
+          "options": {
+            "tsConfig": "projects/100lixo-lib/ngx-service/tsconfig.spec.json"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/100lixo-lib/ngx-service/tsconfig.lib.json",
+              "projects/100lixo-lib/ngx-service/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "@100lixo-lib/ngx-auth": {
+      "projectType": "library",
+      "root": "projects/100lixo-lib/ngx-auth",
+      "sourceRoot": "projects/100lixo-lib/ngx-auth/src",
+      "prefix": "ngx",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "tsConfig": "projects/100lixo-lib/ngx-auth/tsconfig.lib.json",
+            "project": "projects/100lixo-lib/ngx-auth/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/100lixo-lib/ngx-auth/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-builders/jest:run",
+          "options": {
+            "tsConfig": "projects/100lixo-lib/ngx-auth/tsconfig.spec.json"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/100lixo-lib/ngx-auth/tsconfig.lib.json",
+              "projects/100lixo-lib/ngx-auth/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "@100lixo-lib/ngx-domain": {
+      "projectType": "library",
+      "root": "projects/100lixo-lib/ngx-domain",
+      "sourceRoot": "projects/100lixo-lib/ngx-domain/src",
+      "prefix": "ngx",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "tsConfig": "projects/100lixo-lib/ngx-domain/tsconfig.lib.json",
+            "project": "projects/100lixo-lib/ngx-domain/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/100lixo-lib/ngx-domain/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-builders/jest:run",
+          "options": {
+            "tsConfig": "projects/100lixo-lib/ngx-domain/tsconfig.spec.json"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/100lixo-lib/ngx-domain/tsconfig.lib.json",
+              "projects/100lixo-lib/ngx-domain/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "cli": {
+    "analytics": "013a6c68-c0fb-4937-841d-a94be50ea630"
+  },
+  "defaultProject": "ngx-100lixo"
+}

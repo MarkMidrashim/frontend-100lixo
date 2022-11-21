@@ -1,0 +1,60 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "baseUrl": "./",
+    "outDir": "./dist/out-tsc",
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "skipLibCheck": true,
+    "emitDecoratorMetadata": false,
+    "noFallthroughCasesInSwitch": true,
+    "sourceMap": true,
+    "declaration": false,
+    "downlevelIteration": true,
+    "experimentalDecorators": true,
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "moduleResolution": "node",
+    "importHelpers": true,
+    "target": "es2018",
+    "module": "es2020",
+    "lib": [
+      "es2018",
+      "dom"
+    ],
+    "paths": {
+      "@app/*": [
+        "projects/ngx-100lixo/src/*"
+      ],
+      "@100lixo-lib/ngx-domain": [
+        "dist/100lixo-lib/ngx-domain/100lixo-lib-ngx-domain",
+        "dist/100lixo-lib/ngx-domain"
+      ],
+      "@100lixo-lib/ngx-api": [
+        "dist/100lixo-lib/ngx-api/100lixo-lib-ngx-api",
+        "dist/100lixo-lib/ngx-api"
+      ],
+      "@100lixo-lib/ngx-auth": [
+        "dist/100lixo-lib/ngx-auth/100lixo-lib-ngx-auth",
+        "dist/100lixo-lib/ngx-auth"
+      ],
+      "@100lixo-lib/ngx-component": [
+        "dist/100lixo-lib/ngx-component/100lixo-lib-ngx-component",
+        "dist/100lixo-lib/ngx-component"
+      ],
+      "@100lixo-lib/ngx-service": [
+        "dist/100lixo-lib/ngx-service/100lixo-lib-ngx-service",
+        "dist/100lixo-lib/ngx-service"
+      ],
+      "@100lixo-lib/ngx-pipes": [
+        "dist/100lixo-lib/ngx-pipes/100lixo-lib-ngx-pipes",
+        "dist/100lixo-lib/ngx-pipes"
+      ]
+    }
+  },
+  "angularCompilerOptions": {
+    "strictInjectionParameters": true,
+    "strictInputAccessModifiers": true,
+    "strictTemplates": true
+  }
+}
