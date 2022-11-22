@@ -1,9 +1,9 @@
-import { IPaginableAPIModel } from '../interfaces/paginable.interface';
 import { Injector } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Entity } from './entity.abstract';
 import { IQueryParams } from '../interfaces/query-params.interface';
+import { IPaginableAPIModel } from '../interfaces/paginable.interface';
 import { PathParams } from '../types/path-params.type';
 
 export abstract class AbstractAPI<T> {
@@ -147,8 +147,9 @@ export abstract class AbstractAPI<T> {
    *
    * @returns
    */
-  protected patchGeneric<U>(entity: Entity, params?: HttpParams): Observable<U> {
-    return this.http.patch<U>(this.url, entity, { params: params });
+  protected patchGeneric<U>(entity: Entity, pathParams?: PathParams, queryParams?: IQueryParams, customBaseUrl?: string): Observable<U> {
+    const patchUrl = this.getRequestUrl(pathParams, queryParams, customBaseUrl);
+    return this.http.patch<U>(patchUrl, entity);
   }
 
   /**
@@ -163,8 +164,9 @@ export abstract class AbstractAPI<T> {
    *
    * @returns
    */
-  protected deleteGeneric(params?: HttpParams): Observable<void> {
-    return this.http.delete<void>(this.url, { params: params });
+  protected deleteGeneric(entity: Entity, pathParams?: PathParams, queryParams?: IQueryParams, customBaseUrl?: string): Observable<void> {
+    const deleteUrl = this.getRequestUrl(pathParams, queryParams, customBaseUrl);
+    return this.http.delete<void>(deleteUrl);
   }
 
   /**

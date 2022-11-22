@@ -36,8 +36,8 @@ export class PessoaAPI extends AbstractAPI<IPessoa> {
     return super.putGeneric(entity);
   }
 
-  /*delete(id: number): Observable<void> {
-    return super.deleteGeneric(id);
-  }*/
+  delete(entity: IPessoa, id: number): Observable<void> {
+    return super.deleteGeneric(entity, id);
+  }
 
 }
