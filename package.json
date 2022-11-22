@@ -7,7 +7,7 @@
   },
   "scripts": {
     "ng": "ng",
-    "start": "ng serve ngx-100lixo --disable-host-check --host 0.0.0.0",
+    "start": "ng serve ngx-100lixo --disable-host-check --host 0.0.0.0 --proxy-config proxy.conf.json",
     "build:initial": "npm i && npm run build:libs && npm run build:app",
     "build:app": "ng build ngx-100lixo",
     "build:libs": "npm run build:lib-ngx-domain && npm run build:lib-ngx-api && npm run build:lib-ngx-auth && npm run build:lib-ngx-service && npm run build:lib-ngx-pipes && npm run build:lib-ngx-component",

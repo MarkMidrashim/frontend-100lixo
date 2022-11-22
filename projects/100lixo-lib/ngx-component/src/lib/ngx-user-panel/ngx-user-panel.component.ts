@@ -1,7 +1,7 @@
 import { Component, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output, Renderer2, ViewChild } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 import { NgxUserPanelService } from './ngx-user-panel.service';
-import { IPessoa } from '@100lixo-lib/ngx-domain';
+import { IPaginableAPIModel, IPessoa } from '@100lixo-lib/ngx-domain';
 import { NgxPessoaService } from '@100lixo-lib/ngx-service';
 
 export interface IUserPanel {
@@ -39,8 +39,10 @@ export class NgxUserPanelComponent implements OnInit, OnDestroy {
     this.loading = false;
 
     this._pessoaService.getByEmail(this.email)
-      .subscribe((item: IPessoa) => {
-        this.user = item;
+      .subscribe((response: IPaginableAPIModel<IPessoa>) => {
+        if (response.content.length === 1) {
+          this.user = response.content[0] as IPessoa;
+        }
       });
 
     this.painel$.subscribe((panel: IUserPanel) => {

@@ -190,7 +190,7 @@ export abstract class AbstractAPI<T> {
 
     let requestUrl = customBaseUrl ? customBaseUrl : this.url;
     if (pathParams) {
-      requestUrl += `/${pathParams}`;
+      requestUrl += `${pathParams}`;
     }
 
     return `${requestUrl}${stringQueryParams}`;

@@ -7,7 +7,7 @@ import { AbstractAPI, IEnvironment, IPaginableAPIModel, IPessoa, IQueryParams, P
 })
 export class PessoaAPI extends AbstractAPI<IPessoa> {
 
-  protected url = this._environment.backendUrl + '/api/v1/usuario';
+  protected url = this._environment.backendUrl + '/api/v1/usuario/';
 
   /**
    * CONSTRUCTOR
@@ -24,8 +24,8 @@ export class PessoaAPI extends AbstractAPI<IPessoa> {
     return super.getGeneric<IPessoa>(pathParams, queryParams, customBaseUrl);
   }
 
-  getAll(): Observable<IPaginableAPIModel<IPessoa>> {
-    return super.getListGeneric<IPessoa>();
+  getAll(pathParams?: PathParams, queryParams?: IQueryParams, customBaseUrl?: string): Observable<IPaginableAPIModel<IPessoa>> {
+    return super.getListGeneric<IPessoa>(pathParams, queryParams, customBaseUrl);
   }
 
   create(entity: IPessoa): Observable<IPessoa> {

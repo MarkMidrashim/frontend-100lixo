@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { IPessoa, Pessoa } from '@100lixo-lib/ngx-domain';
+import { IPaginableAPIModel, IPessoa, Pessoa } from '@100lixo-lib/ngx-domain';
 import { PessoaAPI, PessoaQueryParams } from '@100lixo-lib/ngx-api';
 import { map } from 'rxjs/operators';
 
@@ -22,12 +22,16 @@ export class NgxPessoaService {
       .pipe(map((item: IPessoa) => new Pessoa(item)));
   }
 
-  getByEmail(email: string): Observable<IPessoa> {
+  getByEmail(email: string): Observable<IPaginableAPIModel<IPessoa>> {
     const queryParams = new PessoaQueryParams();
     queryParams.addQueryParam('email', email);
 
-    return this._pessoaApi.get(`findByEmail`, queryParams)
-      .pipe(map((item: IPessoa) => new Pessoa(item)));
+    return this._pessoaApi.getAll(undefined, queryParams).pipe(
+      map((response: IPaginableAPIModel<IPessoa>) => {
+        response.content = response.content.map((item: IPessoa) => new Pessoa(item))
+        return response;
+      })
+    );
   }
 
 }
