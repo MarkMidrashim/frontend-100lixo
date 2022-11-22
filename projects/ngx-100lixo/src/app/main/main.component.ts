@@ -61,10 +61,8 @@ export class MainComponent implements OnInit {
     switch(route) {
       case 'dashboard':
         return 'analytics';
-      case 'clients':
-        return 'users';
-      case 'zones':
-        return 'globe-americas';
+      case 'collections':
+        return 'recycle';
       default:
         return '';
     }

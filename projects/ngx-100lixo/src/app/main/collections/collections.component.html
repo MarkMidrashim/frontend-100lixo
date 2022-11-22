@@ -1,7 +1,7 @@
 <div class="row">
   <div class="col-12">
     <div class="card">
-      <div class="table-responsive" *ngIf="clientes$ | async as clientes; else noContent">
+      <div class="table-responsive" *ngIf="coletas$ | async as coletas; else noContent">
         <div class="dataTable-wrapper dataTable-loading no-footer sortable searchable fixed-columns">
           <div class="dataTable-top"></div>
           <div class="dataTable-container">
@@ -11,42 +11,42 @@
                   <th data-sortable=""><a href="#" class="dataTable-sorter">Nome</a></th>
                   <th data-sortable=""><a href="#" class="dataTable-sorter">Documento</a></th>
                   <th data-sortable=""><a href="#" class="dataTable-sorter">Tipo Cliente</a></th>
-                  <th data-sortable=""><a href="#" class="dataTable-sorter">Telefone</a></th>
-                  <th data-sortable=""><a href="#" class="dataTable-sorter">Status</a></th>
+                  <th data-sortable=""><a href="#" class="dataTable-sorter">Data Coleta</a></th>
+                  <th data-sortable=""><a href="#" class="dataTable-sorter">Periodo</a></th>
                   <th data-sortable=""><a href="#" class="dataTable-sorter">CEP</a></th>
                   <th>Ações</th>
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let cliente of clientes.content; let i = index">
+                <tr *ngFor="let coleta of coletas.content; let i = index">
                   <td class="text-xs font-weight-bold">
                     <div class="d-flex align-items-center">
                       <div class="avatar avatar-xs me-2 bg-gradient-primary">
-                        <span>{{ cliente.nome | firstLetter }}</span>
+                        <span>{{ coleta.usuario.nome | firstLetter }}</span>
                       </div>
-                      <span>{{ cliente.nome }}</span>
+                      <span>{{ coleta.usuario.nome }}</span>
                     </div>
                   </td>
                   <td class="font-weight-bold">
-                    <span class="my-2 text-xs">***.***.***-{{ cliente.ultimosDigitosDocumento }}</span>
+                    <span class="my-2 text-xs">***.***.***-</span>
                   </td>
                   <td class="text-xs font-weight-bold">
                     <div class="d-flex align-items-center">
-                      <img [src]="cliente.tipoCliente == 'PF' ? 'assets/img/user.png' : 'assets/img/judge.png'"
+                      <!--<img [src]="coleta.tipoCliente == 'PF' ? 'assets/img/user.png' : 'assets/img/judge.png'"
                         width="22" class="mb-0 me-2 d-flex align-items-center justify-content-center" />
-                      <span>{{ cliente.tipoCliente }}</span>
+                      <span>{{ coleta.tipoCliente }}</span>-->
                     </div>
                   </td>
                   <td class="text-xs font-weight-bold">
                     <div class="d-flex align-items-center">
-                      <p class="text-xs font-weight-bold ms-2 mb-0">({{ cliente.ddd }}) {{ cliente.telefone }}</p>
+                      <p class="text-xs font-weight-bold ms-2 mb-0">{{ coleta.dataColeta }}</p>
                     </div>
                   </td>
                   <td class="text-xs font-weight-bold">
-                    <span class="badge badge-info badge-md">{{ cliente.status.descricao }}</span>
+                    <span class="badge badge-info badge-md">{{ coleta.periodo }}</span>
                   </td>
                   <td class="text-xs font-weight-bold">
-                    <span class="my-2 text-xs">{{ cliente.cep }}</span>
+                    <!--<span class="my-2 text-xs">{{ coleta.usuario.endereco.cep }}</span>-->
                   </td>
                   <td class="text-sm">
                     <a href="javascript:;" data-bs-toggle="tooltip" data-bs-original-title="Preview product">
@@ -68,10 +68,10 @@
               Página
               <input class="form-control pagination text-center p-0"
                 type="text"
-                [value]="clientes.page.number"
+                [value]="coletas.page.number"
                 onfocus="focused(this)"
                 onfocusout="defocused(this)" />
-              de <b>{{ clientes.page.totalPages }}</b>
+              de <b>{{ coletas.page.totalPages }}</b>
             </div>
           </div>
         </div>

@@ -6,12 +6,8 @@ export const routes: Routes = [
     loadChildren: () => import('./dashboard/dashboard.module').then((m) => m.DashboardModule)
   },
   {
-    path: 'clients',
-    loadChildren: () => import('./clients/clients.module').then((m) => m.ClientsModule)
-  },
-  {
-    path: 'zones',
-    loadChildren: () => import('./zones/zones.module').then((m) => m.ZonesModule)
+    path: 'collections',
+    loadChildren: () => import('./collections/collections.module').then((m) => m.CollectionsModule)
   },
   {
     path: '',
