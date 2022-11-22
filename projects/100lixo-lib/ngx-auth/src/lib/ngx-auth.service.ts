@@ -147,11 +147,11 @@ export class NgxAuthService {
     try {
       const decoded = <JWT>jwt_decode(this.getToken());
 
-      if (!decoded.user_name) {
+      if (!decoded.sub) {
         return;
       }
 
-      return decoded.user_name;
+      return decoded.sub;
     } catch(e) {
       console.error(e);
       throw new Error('Error get username from token');
@@ -170,8 +170,6 @@ export class NgxAuthService {
       password: password
     });
 
-    return Object.keys(body).map((item: string) => {
-			return `${item}=${body[item]}`
-		}).join('&');
+    return JSON.stringify(body);
   }
 }

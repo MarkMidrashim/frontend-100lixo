@@ -1,20 +1,22 @@
-import { Injectable, Injector } from '@angular/core';
-import { HttpParams } from '@angular/common/http';
+import { Inject, Injectable, Injector } from '@angular/core';
 import { Observable } from 'rxjs';
-import { AbstractAPI, IPaginableAPIModel, IPessoa, IQueryParams, PathParams } from '@100lixo-lib/ngx-domain';
+import { AbstractAPI, IEnvironment, IPaginableAPIModel, IPessoa, IQueryParams, PathParams } from '@100lixo-lib/ngx-domain';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PessoaAPI extends AbstractAPI<IPessoa> {
 
-  protected url = 'http://localhost:8765/uve-ms-pessoa/api/v1/pessoas';
+  protected url = this._environment.backendUrl + '/api/v1/usuario';
 
   /**
    * CONSTRUCTOR
    * @param injector: Injector
    */
-  constructor(injector: Injector) {
+  constructor(
+    @Inject('environment') private _environment: IEnvironment,
+    injector: Injector
+  ) {
     super(injector);
   }
 

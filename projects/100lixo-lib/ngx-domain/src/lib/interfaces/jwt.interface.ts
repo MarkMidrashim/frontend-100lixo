@@ -4,10 +4,8 @@ export declare type Permissions =
   | 'ROLE_OPERATOR';
 
 export interface JWT {
+  sub: string;
+  roles: Permissions[];
+  iat: number;
   exp: number;
-  user_name: string;
-  authorities: Permissions[];
-  jti: string;
-  client_id: string;
-  scope: string[];
 }
