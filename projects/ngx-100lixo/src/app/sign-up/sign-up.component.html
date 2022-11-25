@@ -1,6 +1,8 @@
 <section>
-  <div class="page-header align-items-start section-height-50 pt-5 pb-11 m-3 border-radius-lg"
-				style="background-image: url('assets/img/reciclagem.jpg');">
+  <div
+    class="page-header align-items-start section-height-50 pt-5 pb-11 m-3 border-radius-lg"
+    style="background-image: url('assets/img/reciclagem.jpg')"
+  >
     <span class="mask bg-gradient-dark opacity-6"></span>
     <div class="container">
       <div class="row justify-content-center">
@@ -14,27 +16,63 @@
     </div>
   </div>
 
-  <div class="container card mb-8" style="margin-top: -12rem;">
+  <div class="container card mb-8" style="margin-top: -12rem">
     <div class="row">
       <div class="col-12">
         <form role="form" [formGroup]="form">
-          <lib-ngx-stepper #cdkStepper (stepperFinished)="register()" [linear]="isLinear">
-            <cdk-step [editable]="isEditable" [label]="'Tipo de Cliente'" formGroupName="step1" [stepControl]="form.get('step1')!">
-              <div class="p-3 border-radius-xl bg-white js-active" data-animation="FadeIn">
+          <lib-ngx-stepper
+            #cdkStepper
+            (stepperFinished)="register()"
+            [linear]="isLinear"
+          >
+            <cdk-step
+              [editable]="isEditable"
+              [label]="'Tipo de Cliente'"
+              formGroupName="step1"
+              [stepControl]="form.get('step1')!"
+            >
+              <div
+                class="p-3 border-radius-xl bg-white js-active"
+                data-animation="FadeIn"
+              >
                 <h5 class="font-weight-bolder mb-0">Tipo de Cliente</h5>
                 <p class="mb-0 text-sm">Você é uma pessoa:</p>
                 <div class="multisteps-form__content">
                   <div class="row mt-4 d-flex justify-content-center">
                     <div class="col-sm-6 col-md-6 text-center">
-                      <input type="radio" class="btn-check" value="PJ" id="PJ" [(ngModel)]="tipoCliente" (change)="defineTypePerson()" autocomplete="off" formControlName="tipo_cliente" />
-                      <label class="btn btn-lg btn-outline-secondary border-2 px-6 py-5" for="PJ">
+                      <input
+                        type="radio"
+                        class="btn-check"
+                        value="PJ"
+                        id="PJ"
+                        [(ngModel)]="tipoCliente"
+                        (change)="defineTypePerson()"
+                        autocomplete="off"
+                        formControlName="tipo_cliente"
+                      />
+                      <label
+                        class="btn btn-lg btn-outline-secondary border-2 px-6 py-5"
+                        for="PJ"
+                      >
                         <img src="assets/img/judge.png" width="60" />
                       </label>
                       <h6>Jurídica</h6>
                     </div>
                     <div class="col-sm-6 col-md-6 text-center col-md-offset-2">
-                      <input type="radio" class="btn-check" value="PF" id="PF" [(ngModel)]="tipoCliente" (change)="defineTypePerson()" autocomplete="off" formControlName="tipo_cliente" />
-                      <label class="btn btn-lg btn-outline-secondary border-2 px-6 py-5" for="PF">
+                      <input
+                        type="radio"
+                        class="btn-check"
+                        value="PF"
+                        id="PF"
+                        [(ngModel)]="tipoCliente"
+                        (change)="defineTypePerson()"
+                        autocomplete="off"
+                        formControlName="tipo_cliente"
+                      />
+                      <label
+                        class="btn btn-lg btn-outline-secondary border-2 px-6 py-5"
+                        for="PF"
+                      >
                         <img src="assets/img/user.png" width="60" />
                       </label>
                       <h6>Física</h6>
@@ -44,59 +82,94 @@
               </div>
             </cdk-step>
 
-            <cdk-step [editable]="isEditable" [label]="'Identidade'" formGroupName="step2" [stepControl]="form.get('step2')!">
-              <div class="p-3 border-radius-xl bg-white" data-animation="FadeIn">
+            <cdk-step
+              [editable]="isEditable"
+              [label]="'Identidade'"
+              formGroupName="step2"
+              [stepControl]="form.get('step2')!"
+            >
+              <div
+                class="p-3 border-radius-xl bg-white"
+                data-animation="FadeIn"
+              >
                 <h5 class="font-weight-bolder">Identidade</h5>
                 <p class="mb-0 text-sm">Preencha seus dados:</p>
                 <div class="multisteps-form__content">
                   <div class="row mt-3">
                     <div class="col-sm-12 col-lg-6">
                       <lib-ngx-form-field
-                          class="form-field-nome"
-                          labelContent="Nome"
-                          for="nome"
-                          [required]="true"
-                          [validatorMessages]="[
-                            { validator: 'required', message: 'Esse campo é obrigatório'},
-                            { validator: 'maxlength', message: 'Esse campo deve possuir no máximo 60 caracteres'}
-                          ]"
-                        >
-                          <input type="text" class="multisteps-form__input form-control" placeholder="ex. Marcos" formControlName="nome" />
-                        </lib-ngx-form-field>
+                        class="form-field-nome"
+                        labelContent="Nome"
+                        for="nome"
+                        [required]="true"
+                        [validatorMessages]="[
+                          {
+                            validator: 'required',
+                            message: 'Esse campo é obrigatório'
+                          },
+                          {
+                            validator: 'maxlength',
+                            message:
+                              'Esse campo deve possuir no máximo 60 caracteres'
+                          }
+                        ]"
+                      >
+                        <input
+                          type="text"
+                          class="multisteps-form__input form-control"
+                          placeholder="ex. Marcos"
+                          formControlName="nome"
+                        />
+                      </lib-ngx-form-field>
                     </div>
                     <div class="col-sm-12 col-lg-6">
                       <lib-ngx-form-field
-                          class="form-field-documento"
-                          [labelContent]="labelDocumento"
-                          for="documento"
-                          [required]="true"
-                          [validatorMessages]="[
-                            { validator: 'required', message: 'Esse campo é obrigatório' },
-                            { validator: 'invalid', message: 'Este documento é inválido' }
-                          ]"
-                        >
-                          <input type="text"
-                            #document
-                            class="multisteps-form__input form-control"
-                            [placeholder]="'ex. ' + documentMask"
-                            [mask]="documentMask"
-                            formControlName="documento"
-                            (input)="getLastTwoNumbersFromDocumentAndValidate(document.value)"
-                          />
-                        </lib-ngx-form-field>
+                        class="form-field-documento"
+                        [labelContent]="labelDocumento"
+                        for="documento"
+                        [required]="true"
+                        [validatorMessages]="[
+                          {
+                            validator: 'required',
+                            message: 'Esse campo é obrigatório'
+                          },
+                          {
+                            validator: 'invalid',
+                            message: 'Este documento é inválido'
+                          }
+                        ]"
+                      >
+                        <input
+                          type="text"
+                          #document
+                          class="multisteps-form__input form-control"
+                          [placeholder]="'ex. ' + documentMask"
+                          [mask]="documentMask"
+                          formControlName="documento"
+                          (input)="
+                            getLastTwoNumbersFromDocumentAndValidate(
+                              document.value
+                            )
+                          "
+                        />
+                      </lib-ngx-form-field>
                     </div>
                   </div>
                   <div class="row mt-3">
                     <div *ngIf="tipoCliente == 'PF'" class="col-sm-12 col-lg-6">
                       <lib-ngx-form-field
-                          class="form-field-data-nascimento"
-                          labelContent="Data de Nascimento"
-                          for="data-nascimento"
-                          [required]="false"
-                          [validatorMessages]="[]"
-                        >
-                          <input type="date" class="multisteps-form__input form-control" formControlName="data_nascimento" />
-                        </lib-ngx-form-field>
+                        class="form-field-data-nascimento"
+                        labelContent="Data de Nascimento"
+                        for="data-nascimento"
+                        [required]="false"
+                        [validatorMessages]="[]"
+                      >
+                        <input
+                          type="date"
+                          class="multisteps-form__input form-control"
+                          formControlName="data_nascimento"
+                        />
+                      </lib-ngx-form-field>
                     </div>
                     <div class="col-sm-12 col-lg-6">
                       <div class="row">
@@ -107,11 +180,24 @@
                             for="ddd"
                             [required]="true"
                             [validatorMessages]="[
-                              { validator: 'required', message: 'Esse campo é obrigatório'},
-                              { validator: 'maxlength', message: 'Esse campo deve possuir no máximo 2 dígitos'}
+                              {
+                                validator: 'required',
+                                message: 'Esse campo é obrigatório'
+                              },
+                              {
+                                validator: 'maxlength',
+                                message:
+                                  'Esse campo deve possuir no máximo 2 dígitos'
+                              }
                             ]"
                           >
-                            <input type="text" class="multisteps-form__input form-control" mask="(00)" placeholder="ex. (11)" formControlName="ddd" />
+                            <input
+                              type="text"
+                              class="multisteps-form__input form-control"
+                              mask="(00)"
+                              placeholder="ex. (11)"
+                              formControlName="ddd"
+                            />
                           </lib-ngx-form-field>
                         </div>
                         <div class="col-8">
@@ -121,30 +207,62 @@
                             for="telefone"
                             [required]="true"
                             [validatorMessages]="[
-                              { validator: 'required', message: 'Esse campo é obrigatório'},
-                              { validator: 'maxlength', message: 'Esse campo deve possuir no máximo 10 dígitos'}
+                              {
+                                validator: 'required',
+                                message: 'Esse campo é obrigatório'
+                              },
+                              {
+                                validator: 'maxlength',
+                                message:
+                                  'Esse campo deve possuir no máximo 10 dígitos'
+                              }
                             ]"
                           >
-                            <input type="text" class="multisteps-form__input form-control" mask="0000-0000 || 00000-0000" placeholder="ex. 00000-0099" formControlName="telefone" />
+                            <input
+                              type="text"
+                              class="multisteps-form__input form-control"
+                              mask="0000-0000 || 00000-0000"
+                              placeholder="ex. 00000-0099"
+                              formControlName="telefone"
+                            />
                           </lib-ngx-form-field>
                         </div>
                       </div>
                     </div>
                   </div>
                   <div class="row mt-3">
-                    <div [ngClass]="tipoCliente == 'PF' ? 'col-12' : 'col-sm-12 col-md-8'">
+                    <div
+                      [ngClass]="
+                        tipoCliente == 'PF' ? 'col-12' : 'col-sm-12 col-md-8'
+                      "
+                    >
                       <lib-ngx-form-field
-                          class="form-field-email"
-                          labelContent="E-mail"
-                          for="email"
-                          [required]="true"
-                          [validatorMessages]="[
-                            { validator: 'required', message: 'Esse campo é obrigatório'},
-                            { validator: 'email', message: 'Esse e-mail deve ser válido'},
-                            { validator: 'maxlength', message: 'Esse campo deve possuir no máximo 100 caracteres'}
-                          ]"
+                        class="form-field-email"
+                        labelContent="E-mail"
+                        for="email"
+                        [required]="true"
+                        [validatorMessages]="[
+                          {
+                            validator: 'required',
+                            message: 'Esse campo é obrigatório'
+                          },
+                          {
+                            validator: 'email',
+                            message: 'Esse e-mail deve ser válido'
+                          },
+                          {
+                            validator: 'maxlength',
+                            message:
+                              'Esse campo deve possuir no máximo 100 caracteres'
+                          }
+                        ]"
                       >
-                        <input type="email" class="multisteps-form__input form-control" placeholder="ex. meunome@gmail.com" formControlName="email" />
+                        <input
+                          type="email"
+                          class="multisteps-form__input form-control"
+                          placeholder="ex. meunome@gmail.com"
+                          formControlName="email"
+                        />
                       </lib-ngx-form-field>
                     </div>
                   </div>
@@ -152,296 +270,370 @@
               </div>
             </cdk-step>
 
-            <cdk-step [editable]="isEditable" [label]="'Endereço'" formGroupName="step3" [stepControl]="form.get('step3')!">
-              <div class="p-3 border-radius-xl bg-white" data-animation="FadeIn">
+            <cdk-step
+              [editable]="isEditable"
+              [label]="'Endereço'"
+              formGroupName="step3"
+              [stepControl]="form.get('step3')!"
+            >
+              <div
+                class="p-3 border-radius-xl bg-white"
+                data-animation="FadeIn"
+              >
                 <h5 class="font-weight-bolder">Endereço</h5>
                 <p class="mb-0 text-sm">Informe seu local:</p>
                 <div class="multisteps-form__content">
                   <div class="row mt-3">
                     <div class="col-sm-12 col-lg-3">
                       <lib-ngx-form-field
-                          class="form-field-cep"
-                          labelContent="CEP"
-                          for="cep"
-                          [required]="true"
-                          [validatorMessages]="[
-                            { validator: 'required', message: 'Esse campo é obrigatório'},
-                            { validator: 'maxlength', message: 'Esse campo deve possuir no máximo 8 dígitos'}
-                          ]"
-                        >
-                          <input type="text"
-                            #cep
-                            class="multisteps-form__input form-control"
-                            mask="00000-000"
-                            placeholder="ex. 00000-000"
-                            formControlName="cep"
-                            (keyup)="searchCep()"
-                          />
-                        </lib-ngx-form-field>
+                        class="form-field-cep"
+                        labelContent="CEP"
+                        for="cep"
+                        [required]="true"
+                        [validatorMessages]="[
+                          {
+                            validator: 'required',
+                            message: 'Esse campo é obrigatório'
+                          },
+                          {
+                            validator: 'maxlength',
+                            message:
+                              'Esse campo deve possuir no máximo 8 dígitos'
+                          }
+                        ]"
+                      >
+                        <input
+                          type="text"
+                          #cep
+                          class="multisteps-form__input form-control"
+                          mask="00000-000"
+                          placeholder="ex. 00000-000"
+                          formControlName="cep"
+                          (keyup)="searchCep()"
+                        />
+                      </lib-ngx-form-field>
                     </div>
                     <div class="col-sm-12 col-lg-7">
                       <lib-ngx-form-field
-                          class="form-field-logradouro"
-                          labelContent="Logradouro"
-                          for="logradouro"
-                          [required]="true"
-                          [hidden]="!contentLoaded"
-                          [validatorMessages]="[
-                            { validator: 'required', message: 'Esse campo é obrigatório'},
-                            { validator: 'maxlength', message: 'Esse campo deve possuir no máximo 255 caracteres'}
-                          ]"
-                        >
-                          <input type="text"
-                            class="multisteps-form__input form-control"
-                            placeholder="ex. Rua 9 de Julho"
-                            formControlName="logradouro"
-                            [attr.disabled]="form.get('step3')?.get('logradouro')?.value != ''"
-                          />
-                        </lib-ngx-form-field>
-                        <div [hidden]="contentLoaded" style="margin-top: 2rem !important">
-                          <ngx-skeleton-loader
-                            count="1"
-                            [theme]="{ width: '100%', 'border-radius': '40', height: '40px' }"
-                          ></ngx-skeleton-loader>
-                        </div>
-                    </div>
-                    <div class="col-sm-12 col-lg-2">
-                      <lib-ngx-form-field
-                          class="form-field-numero_endereco"
-                          labelContent="Número"
-                          for="numero_endereco"
-                          [required]="true"
-                          [hidden]="!contentLoaded"
-                          [validatorMessages]="[
-                            { validator: 'required', message: 'Esse campo é obrigatório'}
-                          ]"
-                        >
-                          <input type="text"
-                            class="multisteps-form__input form-control"
-                            placeholder="ex. 1000"
-                            formControlName="numero_endereco"
-                          />
-                        </lib-ngx-form-field>
-                        <div [hidden]="contentLoaded" style="margin-top: 2rem !important">
-                          <ngx-skeleton-loader
-                            count="1"
-                            [theme]="{ width: '100%', 'border-radius': '40', height: '40px' }"
-                          ></ngx-skeleton-loader>
-                        </div>
-                    </div>
-                  </div>
-                  <div class="row mt-3">
-                    <div class="col-sm-12" [ngClass]="tipoEndereco?.descricao?.includes('ondomínio') ? 'col-lg-4' : 'col-lg-6'">
-                      <lib-ngx-form-field
-                          class="form-field-complemento_endereco"
-                          labelContent="Complemento"
-                          for="complemento_endereco"
-                          [required]="false"
-                          [hidden]="!contentLoaded"
-                          [validatorMessages]="[
-                            { validator: 'maxlength', message: 'Esse campo deve possuir no máximo 50 caracteres'}
-                          ]"
-                        >
-                          <input type="text"
-                            class="multisteps-form__input form-control"
-                            placeholder="ex. Apto 65 Bl A"
-                            formControlName="complemento_endereco"
-                          />
-                        </lib-ngx-form-field>
-                        <div [hidden]="contentLoaded">
-                          <ngx-skeleton-loader
-                            count="1"
-                            [theme]="{ width: '100%', 'border-radius': '40', height: '40px' }"
-                          ></ngx-skeleton-loader>
-                        </div>
-                    </div>
-                    <div class="col-sm-12" [ngClass]="tipoEndereco?.descricao?.includes('ondomínio') ? 'col-lg-3' : 'col-lg-6'">
-                      <lib-ngx-form-field
-                          class="form-field-tipo_endereco"
-                          labelContent="Tipo Endereço"
-                          for="tipo_endereco"
-                          [required]="true"
-                          [hidden]="!contentLoaded"
-                          [validatorMessages]="[
-                            { validator: 'required', message: 'Esse campo é obrigatório'}
-                          ]"
-                        >
-                          <select class="multisteps-form__select form-control"
-                            (change)="checkTipoEndereco($event)"
-                            placeholder="ex. Condomínio"
-                            formControlName="tipo_endereco"
-                          >
-                            <option selected="selected">Selecione uma opção</option>
-                            <option *ngFor="let tipo of tipoEnderecoList" [value]="tipo.id">{{ tipo.descricao }}</option>
-                          </select>
-                        </lib-ngx-form-field>
-                        <div [hidden]="contentLoaded">
-                          <ngx-skeleton-loader
-                            count="1"
-                            [theme]="{ width: '100%', 'border-radius': '40', height: '40px' }"
-                          ></ngx-skeleton-loader>
-                        </div>
-                    </div>
-                    <div *ngIf="tipoEndereco?.descricao?.includes('ondomínio')"
-                      [ngClass]="tipoEndereco?.descricao?.includes('ondomínio') ? 'col-sm-12 col-lg-3' : ''"
-                    >
-                      <lib-ngx-form-field
-                        class="form-field-quantidade_unidades"
-                        labelContent="Qtd. Unidades"
-                        for="quantidade_unidades"
-                        [tooltip]="'Quantidade de unidades no condomínio'"
-                        [required]="false"
+                        class="form-field-logradouro"
+                        labelContent="Logradouro"
+                        for="logradouro"
+                        [required]="true"
                         [hidden]="!contentLoaded"
                         [validatorMessages]="[
-                          { validator: 'required', message: 'Esse campo é obrigatório'},
-                          { validator: 'maxlength', message: 'Esse campo deve possuir no máximo 9999 dígitos'}
+                          {
+                            validator: 'required',
+                            message: 'Esse campo é obrigatório'
+                          },
+                          {
+                            validator: 'maxlength',
+                            message:
+                              'Esse campo deve possuir no máximo 255 caracteres'
+                          }
                         ]"
                       >
-                        <input type="text"
+                        <input
+                          type="text"
                           class="multisteps-form__input form-control"
-                          placeholder="ex. 250"
-                          formControlName="quantidade_unidades"
+                          placeholder="ex. Rua 9 de Julho"
+                          formControlName="logradouro"
+                          [attr.disabled]="
+                            form.get('step3')?.get('logradouro')?.value != ''
+                          "
                         />
                       </lib-ngx-form-field>
-                      <div [hidden]="contentLoaded">
-                        <ngx-skeleton-loader
-                          count="1"
-                          [theme]="{ width: '100%', 'border-radius': '40', height: '40px' }"
-                        ></ngx-skeleton-loader>
-                      </div>
-                    </div>
-                    <div *ngIf="tipoEndereco?.descricao?.includes('ondomínio')"
-                      [ngClass]="tipoEndereco?.descricao?.includes('ondomínio') ? 'col-sm-12 col-lg-2' : ''"
-                    >
-                      <lib-ngx-form-field
-                        class="form-field-sindico"
-                        labelContent="Síndico"
-                        for="sindico"
-                        [tooltip]="'O síndico/zelador/portaria está ciente da coleta?'"
-                        [required]="true"
-                        [hidden]="!contentLoaded"
-                        [validatorMessages]="[
-                          { validator: 'required', message: 'Esse campo é obrigatório'},
-                          { validator: 'maxlength', message: 'Esse campo deve possuir no máximo 9999 dígitos'}
-                        ]"
+                      <div
+                        [hidden]="contentLoaded"
+                        style="margin-top: 2rem !important"
                       >
-                        <div class="form-check form-switch mt-2">
-                          <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" checked="" formControlName="sindico" />
-                        </div>
-                      </lib-ngx-form-field>
-                      <div [hidden]="contentLoaded">
                         <ngx-skeleton-loader
                           count="1"
-                          [theme]="{ width: '100%', 'border-radius': '40', height: '40px' }"
+                          [theme]="{
+                            width: '100%',
+                            'border-radius': '40',
+                            height: '40px'
+                          }"
                         ></ngx-skeleton-loader>
                       </div>
-                    </div>
-                  </div>
-                  <div class="row mt-3">
-                    <div class="col-sm-12 col-lg-6">
-                      <lib-ngx-form-field
-                          class="form-field-bairro"
-                          labelContent="Bairro"
-                          for="bairro"
-                          [required]="true"
-                          [hidden]="!contentLoaded"
-                          [validatorMessages]="[
-                            { validator: 'required', message: 'Esse campo é obrigatório'},
-                            { validator: 'maxlength', message: 'Esse campo deve possuir no máximo 255 caracteres'}
-                          ]"
-                        >
-                          <input type="text"
-                            class="multisteps-form__input form-control"
-                            placeholder="ex. Jardins"
-                            formControlName="bairro"
-                            [attr.disabled]="form.get('step3')?.get('bairro')?.value != ''"
-                          />
-                        </lib-ngx-form-field>
-                        <div [hidden]="contentLoaded">
-                          <ngx-skeleton-loader
-                            count="1"
-                            [theme]="{ width: '100%', 'border-radius': '40', height: '40px' }"
-                          ></ngx-skeleton-loader>
-                        </div>
-                    </div>
-                    <div class="col-sm-12 col-lg-4">
-                      <lib-ngx-form-field
-                          class="form-field-municipio"
-                          labelContent="Cidade"
-                          for="municipio"
-                          [required]="true"
-                          [hidden]="!contentLoaded"
-                          [validatorMessages]="[
-                            { validator: 'required', message: 'Esse campo é obrigatório'},
-                            { validator: 'maxlength', message: 'Esse campo deve possuir no máximo 255 caracteres'}
-                          ]"
-                        >
-                          <input type="text"
-                            class="multisteps-form__input form-control"
-                            placeholder="ex. São Paulo"
-                            formControlName="municipio"
-                            [attr.disabled]="form.get('step3')?.get('municipio')?.value != ''"
-                          />
-                        </lib-ngx-form-field>
-                        <div [hidden]="contentLoaded">
-                          <ngx-skeleton-loader
-                            count="1"
-                            [theme]="{ width: '100%', 'border-radius': '40', height: '40px' }"
-                          ></ngx-skeleton-loader>
-                        </div>
                     </div>
                     <div class="col-sm-12 col-lg-2">
                       <lib-ngx-form-field
-                          class="form-field-estado"
-                          labelContent="UF"
-                          for="estado"
-                          [required]="true"
-                          [hidden]="!contentLoaded"
-                          [validatorMessages]="[
-                            { validator: 'required', message: 'Esse campo é obrigatório'},
-                            { validator: 'maxlength', message: 'Esse campo deve possuir no máximo 255 caracteres'}
-                          ]"
-                        >
-                          <input type="text"
-                            class="multisteps-form__input form-control"
-                            placeholder="ex. SP"
-                            formControlName="estado"
-                            [attr.disabled]="form.get('step3')?.get('estado')?.value != ''"
-                          />
-                        </lib-ngx-form-field>
-                        <div [hidden]="contentLoaded">
-                          <ngx-skeleton-loader
-                            count="1"
-                            [theme]="{ width: '100%', 'border-radius': '40', height: '40px' }"
-                          ></ngx-skeleton-loader>
-                        </div>
-                    </div>
-                  </div>
-                  <div class="row mt-3">
-                    <div class="col-12">
-                      <lib-ngx-form-field
-                        class="form-field-termo_responsabilidade"
-                        for="termo_responsabilidade"
+                        class="form-field-numero_endereco"
+                        labelContent="Número"
+                        for="numero_endereco"
                         [required]="true"
+                        [hidden]="!contentLoaded"
                         [validatorMessages]="[
-                          { validator: 'required', message: 'Esse campo é obrigatório'}
+                          {
+                            validator: 'required',
+                            message: 'Esse campo é obrigatório'
+                          }
                         ]"
                       >
-                        <div class="form-check">
-                          <input class="form-check-input"
-                            [required]="true"
-                            type="checkbox"
-                            id="termo_responsabilidade"
-                            formControlName="termo_responsabilidade" />
-                          <label class="custom-control-label" for="termo_responsabilidade">
-                            Concordo com a
-                            <a href="javascript:;">Política de Privacidade</a>
-                            e com os <a href="javascript:;">Termos de Uso</a>
-                          </label>
-                        </div>
+                        <input
+                          type="text"
+                          class="multisteps-form__input form-control"
+                          placeholder="ex. 1000"
+                          formControlName="numero_endereco"
+                        />
                       </lib-ngx-form-field>
+                      <div
+                        [hidden]="contentLoaded"
+                        style="margin-top: 2rem !important"
+                      >
+                        <ngx-skeleton-loader
+                          count="1"
+                          [theme]="{
+                            width: '100%',
+                            'border-radius': '40',
+                            height: '40px'
+                          }"
+                        ></ngx-skeleton-loader>
+                      </div>
                     </div>
                   </div>
+
+                  <lib-ngx-form-field
+                    class="form-field-quantidade_unidades"
+                    labelContent="Qtd. Unidades"
+                    for="quantidade_unidades"
+                    [tooltip]="'Quantidade de unidades no condomínio'"
+                    [required]="false"
+                    [hidden]="!contentLoaded"
+                    [validatorMessages]="[
+                      {
+                        validator: 'required',
+                        message: 'Esse campo é obrigatório'
+                      },
+                      {
+                        validator: 'maxlength',
+                        message:
+                          'Esse campo deve possuir no máximo 9999 dígitos'
+                      }
+                    ]"
+                  >
+                    <input
+                      type="text"
+                      class="multisteps-form__input form-control"
+                      placeholder="ex. 250"
+                      formControlName="quantidade_unidades"
+                    />
+                  </lib-ngx-form-field>
+                  <div [hidden]="contentLoaded">
+                    <ngx-skeleton-loader
+                      count="1"
+                      [theme]="{
+                        width: '100%',
+                        'border-radius': '40',
+                        height: '40px'
+                      }"
+                    ></ngx-skeleton-loader>
+                  </div>
+                </div>
+                <div
+                  *ngIf="tipoEndereco?.descricao?.includes('ondomínio')"
+                  [ngClass]="
+                    tipoEndereco?.descricao?.includes('ondomínio')
+                      ? 'col-sm-12 col-lg-2'
+                      : ''
+                  "
+                >
+                  <lib-ngx-form-field
+                    class="form-field-sindico"
+                    labelContent="Síndico"
+                    for="sindico"
+                    [tooltip]="
+                      'O síndico/zelador/portaria está ciente da coleta?'
+                    "
+                    [required]="true"
+                    [hidden]="!contentLoaded"
+                    [validatorMessages]="[
+                      {
+                        validator: 'required',
+                        message: 'Esse campo é obrigatório'
+                      },
+                      {
+                        validator: 'maxlength',
+                        message:
+                          'Esse campo deve possuir no máximo 9999 dígitos'
+                      }
+                    ]"
+                  >
+                    <div class="form-check form-switch mt-2">
+                      <input
+                        class="form-check-input"
+                        type="checkbox"
+                        id="flexSwitchCheckDefault"
+                        checked=""
+                        formControlName="sindico"
+                      />
+                    </div>
+                  </lib-ngx-form-field>
+                  <div [hidden]="contentLoaded">
+                    <ngx-skeleton-loader
+                      count="1"
+                      [theme]="{
+                        width: '100%',
+                        'border-radius': '40',
+                        height: '40px'
+                      }"
+                    ></ngx-skeleton-loader>
+                  </div>
+                </div>
+              </div>
+              <div class="row mt-3">
+                <div class="col-sm-12 col-lg-6">
+                  <lib-ngx-form-field
+                    class="form-field-bairro"
+                    labelContent="Bairro"
+                    for="bairro"
+                    [required]="true"
+                    [hidden]="!contentLoaded"
+                    [validatorMessages]="[
+                      {
+                        validator: 'required',
+                        message: 'Esse campo é obrigatório'
+                      },
+                      {
+                        validator: 'maxlength',
+                        message:
+                          'Esse campo deve possuir no máximo 255 caracteres'
+                      }
+                    ]"
+                  >
+                    <input
+                      type="text"
+                      class="multisteps-form__input form-control"
+                      placeholder="ex. Jardins"
+                      formControlName="bairro"
+                      [attr.disabled]="
+                        form.get('step3')?.get('bairro')?.value != ''
+                      "
+                    />
+                  </lib-ngx-form-field>
+                  <div [hidden]="contentLoaded">
+                    <ngx-skeleton-loader
+                      count="1"
+                      [theme]="{
+                        width: '100%',
+                        'border-radius': '40',
+                        height: '40px'
+                      }"
+                    ></ngx-skeleton-loader>
+                  </div>
+                </div>
+                <div class="col-sm-12 col-lg-4">
+                  <lib-ngx-form-field
+                    class="form-field-municipio"
+                    labelContent="Cidade"
+                    for="municipio"
+                    [required]="true"
+                    [hidden]="!contentLoaded"
+                    [validatorMessages]="[
+                      {
+                        validator: 'required',
+                        message: 'Esse campo é obrigatório'
+                      },
+                      {
+                        validator: 'maxlength',
+                        message:
+                          'Esse campo deve possuir no máximo 255 caracteres'
+                      }
+                    ]"
+                  >
+                    <input
+                      type="text"
+                      class="multisteps-form__input form-control"
+                      placeholder="ex. São Paulo"
+                      formControlName="municipio"
+                      [attr.disabled]="
+                        form.get('step3')?.get('municipio')?.value != ''
+                      "
+                    />
+                  </lib-ngx-form-field>
+                  <div [hidden]="contentLoaded">
+                    <ngx-skeleton-loader
+                      count="1"
+                      [theme]="{
+                        width: '100%',
+                        'border-radius': '40',
+                        height: '40px'
+                      }"
+                    ></ngx-skeleton-loader>
+                  </div>
+                </div>
+                <div class="col-sm-12 col-lg-2">
+                  <lib-ngx-form-field
+                    class="form-field-estado"
+                    labelContent="UF"
+                    for="estado"
+                    [required]="true"
+                    [hidden]="!contentLoaded"
+                    [validatorMessages]="[
+                      {
+                        validator: 'required',
+                        message: 'Esse campo é obrigatório'
+                      },
+                      {
+                        validator: 'maxlength',
+                        message:
+                          'Esse campo deve possuir no máximo 255 caracteres'
+                      }
+                    ]"
+                  >
+                    <input
+                      type="text"
+                      class="multisteps-form__input form-control"
+                      placeholder="ex. SP"
+                      formControlName="estado"
+                      [attr.disabled]="
+                        form.get('step3')?.get('estado')?.value != ''
+                      "
+                    />
+                  </lib-ngx-form-field>
+                  <div [hidden]="contentLoaded">
+                    <ngx-skeleton-loader
+                      count="1"
+                      [theme]="{
+                        width: '100%',
+                        'border-radius': '40',
+                        height: '40px'
+                      }"
+                    ></ngx-skeleton-loader>
+                  </div>
+                </div>
+              </div>
+              <div class="row mt-3">
+                <div class="col-12">
+                  <lib-ngx-form-field
+                    class="form-field-termo_responsabilidade"
+                    for="termo_responsabilidade"
+                    [required]="true"
+                    [validatorMessages]="[
+                      {
+                        validator: 'required',
+                        message: 'Esse campo é obrigatório'
+                      }
+                    ]"
+                  >
+                    <div class="form-check">
+                      <input
+                        class="form-check-input"
+                        [required]="true"
+                        type="checkbox"
+                        id="termo_responsabilidade"
+                        formControlName="termo_responsabilidade"
+                      />
+                      <label
+                        class="custom-control-label"
+                        for="termo_responsabilidade"
+                      >
+                        Concordo com a
+                        <a href="javascript:;">Política de Privacidade</a>
+                        e com os <a href="javascript:;">Termos de Uso</a>
+                      </label>
+                    </div>
+                  </lib-ngx-form-field>
                 </div>
               </div>
             </cdk-step>

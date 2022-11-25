@@ -122,10 +122,6 @@ export class SignUpComponent implements OnInit {
           Validators.maxLength(9),
         ]),
         sindico: new FormControl(false, [Validators.required]),
-        tipo_logradouro: new FormControl('', [
-          Validators.required,
-          Validators.maxLength(50),
-        ]),
         logradouro: new FormControl('', [
           Validators.required,
           Validators.maxLength(255),
@@ -142,14 +138,6 @@ export class SignUpComponent implements OnInit {
           Validators.required,
           Validators.maxLength(2),
         ]),
-        tipo_endereco: new FormControl('', [
-          Validators.required,
-          Validators.maxLength(9),
-        ]),
-        numero_endereco: new FormControl('', [
-          Validators.required,
-          Validators.maxLength(9),
-        ]),
         complemento_endereco: new FormControl('', [Validators.maxLength(50)]),
         quantidade_unidades: new FormControl('', [Validators.maxLength(9999)]),
         termo_responsabilidade: new FormControl('', [Validators.required]),
@@ -163,8 +151,6 @@ export class SignUpComponent implements OnInit {
     forkJoin({
       status: this._paramsService.getStatus(),
       categorias: this._paramsService.getCategoria(),
-      tiposEndereco: this._paramsService.getTipoEndereco(),
-      tiposLogradouro: this._paramsService.getTipoLogradouro(),
       estados: this._paramsService.getEstado(),
       generos: this._paramsService.getGenero(),
     })
@@ -172,8 +158,6 @@ export class SignUpComponent implements OnInit {
       .subscribe((response) => {
         this.statusList = response.status;
         this.categoriaList = response.categorias;
-        this.tipoEnderecoList = response.tiposEndereco;
-        this.tipoLogradouroList = response.tiposLogradouro;
         this.estadoList = response.estados;
         this.generoList = response.generos;
         this.contentLoaded = false;
@@ -230,11 +214,11 @@ export class SignUpComponent implements OnInit {
       });
   }
 
-  checkTipoEndereco(event: any): void {
+  /* checkTipoEndereco(event: any): void {
     this.tipoEndereco = this.tipoEnderecoList.filter(
       (item) => item.id == event.target.value
     )[0];
-  }
+  } */
 
   defineTypePerson(): void {
     if (this.form.get('step1')?.get('tipo_cliente')?.value == 'PF') {
@@ -269,11 +253,6 @@ export class SignUpComponent implements OnInit {
     step3?.get('municipio')?.setValue(this.cepSearched.localidade);
     step3?.get('estado')?.setValue(this.cepSearched.uf);
     step3?.get('logradouro')?.setValue(this.cepSearched.logradouro);
-
-    this.tipoLogradouro = this.tipoLogradouroList.filter((item) =>
-      this.cepSearched.logradouro.includes(item.nome)
-    )[0];
-    step3?.get('tipo_logradouro')?.setValue(this.tipoLogradouro);
     step3?.updateValueAndValidity();
   }
 
@@ -287,15 +266,6 @@ export class SignUpComponent implements OnInit {
     this.estado = this.estadoList.filter(
       (item) => item.sigla == this.form.get('step3')?.get('estado')?.value
     )[0];
-    this.tipoEndereco = this.tipoEnderecoList.filter(
-      (item) => item.id == this.form.get('step3')?.get('tipo_endereco')?.value
-    )[0];
-
-    if (this.form.get('step2')?.get('genero')?.value) {
-      this.genero = this.generoList.filter(
-        (item) => item.id == this.form.get('step2')?.get('genero')?.value
-      )[0];
-    }
 
     this.municipio = {
       id: 1,
@@ -311,7 +281,6 @@ export class SignUpComponent implements OnInit {
 
     this.logradouro = {
       nome: this.form.get('step3')?.get('logradouro')?.value,
-      tipoLogradouro: this.tipoLogradouro,
       bairro: this.bairro,
     } as ILogradouro;
   }
@@ -332,11 +301,9 @@ export class SignUpComponent implements OnInit {
         ),
         dataNascimento:
           this.form.get('step2')?.get('data_nascimento')?.value || null,
-        genero: this.genero || null,
         ddd: parseInt(this.form.get('step2')?.get('ddd')?.value),
         telefone: this.form.get('step2')?.get('telefone')?.value,
         email: this.form.get('step2')?.get('email')?.value,
-        categoria: this.categoria,
         cep: this.form.get('step3')?.get('cep')?.value,
         tipoEndereco: this.tipoEndereco,
         logradouro: this.logradouro,
