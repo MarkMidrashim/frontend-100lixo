@@ -67,7 +67,7 @@
                     <div class="col-sm-12 col-lg-6">
                       <lib-ngx-form-field
                           class="form-field-documento"
-                          labelContent="Documento"
+                          [labelContent]="labelDocumento"
                           for="documento"
                           [required]="true"
                           [validatorMessages]="[
@@ -87,10 +87,10 @@
                     </div>
                   </div>
                   <div class="row mt-3">
-                    <div class="col-sm-12 col-lg-6">
+                    <div *ngIf="tipoCliente == 'PF'" class="col-sm-12 col-lg-6">
                       <lib-ngx-form-field
                           class="form-field-data-nascimento"
-                          [labelContent]="labelDataNascimento"
+                          labelContent="Data de Nascimento"
                           for="data-nascimento"
                           [required]="false"
                           [validatorMessages]="[]"
@@ -131,36 +131,6 @@
                       </div>
                     </div>
                   </div>
-                  <div class="row mt-3" *ngIf="tipoCliente == 'PF'">
-                    <div class="col-sm-12 col-md-6">
-                      <lib-ngx-form-field
-                          class="form-field-escolaridade"
-                          labelContent="Escolaridade"
-                          for="escolaridade"
-                          [required]="false"
-                          [validatorMessages]="[]"
-                      >
-                        <select class="multisteps-form__select form-control" placeholder="ex. Residencial" formControlName="escolaridade">
-                          <option selected="selected">Selecione uma opção</option>
-                          <option *ngFor="let escolaridade of escolaridadeList" [value]="escolaridade.id">{{ escolaridade.descricao }}</option>
-                        </select>
-                      </lib-ngx-form-field>
-                    </div>
-                    <div class="col-sm-12 col-md-6">
-                      <lib-ngx-form-field
-                          class="form-field-genero"
-                          labelContent="Gênero"
-                          for="genero"
-                          [required]="false"
-                          [validatorMessages]="[]"
-                      >
-                        <select class="multisteps-form__select form-control" placeholder="ex. Residencial" formControlName="genero">
-                          <option selected="selected">Selecione uma opção</option>
-                          <option *ngFor="let genero of generoList" [value]="genero.id">{{ genero.descricao }}</option>
-                        </select>
-                      </lib-ngx-form-field>
-                    </div>
-                  </div>
                   <div class="row mt-3">
                     <div [ngClass]="tipoCliente == 'PF' ? 'col-12' : 'col-sm-12 col-md-8'">
                       <lib-ngx-form-field
@@ -175,22 +145,6 @@
                           ]"
                       >
                         <input type="email" class="multisteps-form__input form-control" placeholder="ex. meunome@gmail.com" formControlName="email" />
-                      </lib-ngx-form-field>
-                    </div>
-                    <div *ngIf="tipoCliente == 'PJ'" [ngClass]="tipoCliente == 'PJ' ? 'col-sm-12 col-md-4' : ''">
-                      <lib-ngx-form-field
-                          class="form-field-categoria"
-                          labelContent="Categoria"
-                          for="categoria"
-                          [required]="true"
-                          [validatorMessages]="[
-                            { validator: 'required', message: 'Esse campo é obrigatório'}
-                          ]"
-                      >
-                        <select class="multisteps-form__select form-control" placeholder="ex. Residencial" formControlName="categoria">
-                          <option selected="selected">Selecione uma opção</option>
-                          <option *ngFor="let categoria of categoriaList" [value]="categoria.id">{{ categoria.descricao }}</option>
-                        </select>
                       </lib-ngx-form-field>
                     </div>
                   </div>

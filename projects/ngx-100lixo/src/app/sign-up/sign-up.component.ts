@@ -17,7 +17,6 @@ import {
   IEstado,
   IMunicipio,
   IBairro,
-  IEscolaridade,
   IGenero
 } from '@100lixo-lib/ngx-domain';
 import { ViacepAPI, ClienteAPI } from '@100lixo-lib/ngx-api';
@@ -39,8 +38,8 @@ export class SignUpComponent implements OnInit {
   public isCategoria: boolean = false;
   public tipoCliente!: TipoCliente;
   public tipoEndereco!: ITipoEndereco;
+  public labelDocumento!: string;
   public documentMask!: string;
-  public labelDataNascimento!: string;
 
   protected status!: IStatus;
   protected categoria!: ICategoria;
@@ -49,7 +48,6 @@ export class SignUpComponent implements OnInit {
   protected bairro!: IBairro;
   protected tipoLogradouro!: ITipoLogradouro;
   protected logradouro!: ILogradouro;
-  protected escolaridade!: IEscolaridade;
   protected genero!: IGenero;
   protected cepSearched!: IViacep;
 
@@ -58,7 +56,6 @@ export class SignUpComponent implements OnInit {
   public tipoEnderecoList!: ITipoEndereco[];
   public estadoList!: IEstado[];
   public tipoLogradouroList!: ITipoLogradouro[];
-  public escolaridadeList!: IEscolaridade[];
   public generoList!: IGenero[];
 
   public form!: FormGroup;
@@ -94,7 +91,6 @@ export class SignUpComponent implements OnInit {
         telefone: new FormControl('', [Validators.required, Validators.maxLength(10)]),
         email: new FormControl('', [Validators.email, Validators.required, Validators.maxLength(100)]),
         categoria: new FormControl('', [Validators.required]),
-        escolaridade: new FormControl(''),
         genero: new FormControl('')
       }),
       step3: this._formBuilder.group({
@@ -123,7 +119,6 @@ export class SignUpComponent implements OnInit {
       tiposEndereco: this._paramsService.getTipoEndereco(),
       tiposLogradouro: this._paramsService.getTipoLogradouro(),
       estados: this._paramsService.getEstado(),
-      escolaridades: this._paramsService.getEscolaridade(),
       generos: this._paramsService.getGenero()
     })
     .pipe(finalize(() => this._loadingService.destroy(loading)))
@@ -133,7 +128,6 @@ export class SignUpComponent implements OnInit {
       this.tipoEnderecoList = response.tiposEndereco;
       this.tipoLogradouroList = response.tiposLogradouro;
       this.estadoList = response.estados;
-      this.escolaridadeList = response.escolaridades;
       this.generoList = response.generos;
       this.contentLoaded = false;
     });
@@ -188,15 +182,15 @@ export class SignUpComponent implements OnInit {
 
   defineTypePerson(): void {
     if (this.form.get('step1')?.get('tipo_cliente')?.value == 'PF') {
+      this.labelDocumento = 'CPF';
       this.documentMask = '000.000.000-00';
-      this.labelDataNascimento = 'Data de Nascimento';
       this.isCategoria = false;
       this.form.get('step2')?.get('categoria')?.setValue(this.categoriaList.filter(item => item.descricao.includes('aplica'))[0].id);
       this.form.get('step2')?.get('categoria')?.setValidators(null);
       this.form.get('step2')?.updateValueAndValidity();
     } else {
+      this.labelDocumento = 'CNPJ';
       this.documentMask = '00.000.000/0000-00';
-      this.labelDataNascimento = 'Data de Abertura';
       this.isCategoria = true;
       this.form.get('step2')?.get('categoria')?.setValidators(Validators.required);
       this.form.get('step2')?.updateValueAndValidity();
@@ -220,10 +214,6 @@ export class SignUpComponent implements OnInit {
     this.status = this.statusList.filter(item => item.descricao.toLowerCase() == 'novo')[0];
     this.estado = this.estadoList.filter(item => item.sigla == this.form.get('step3')?.get('estado')?.value)[0];
     this.tipoEndereco = this.tipoEnderecoList.filter(item => item.id == this.form.get('step3')?.get('tipo_endereco')?.value)[0];
-
-    if (this.form.get('step2')?.get('escolaridade')?.value) {
-      this.escolaridade = this.escolaridadeList.filter(item => item.id == this.form.get('step2')?.get('escolaridade')?.value)[0];
-    }
 
     if (this.form.get('step2')?.get('genero')?.value) {
       this.genero = this.generoList.filter(item => item.id == this.form.get('step2')?.get('genero')?.value)[0];
@@ -260,7 +250,6 @@ export class SignUpComponent implements OnInit {
         ultimosDigitosDocumento: parseInt(this.form.get('step2')?.get('ultimos_digitos_documento')?.value),
         dataNascimento: this.form.get('step2')?.get('data_nascimento')?.value || null,
         genero: this.genero || null,
-        escolaridade: this.escolaridade || null,
         ddd: parseInt(this.form.get('step2')?.get('ddd')?.value),
         telefone: this.form.get('step2')?.get('telefone')?.value,
         email: this.form.get('step2')?.get('email')?.value,
