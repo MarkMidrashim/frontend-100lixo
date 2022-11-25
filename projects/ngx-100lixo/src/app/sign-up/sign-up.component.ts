@@ -1,5 +1,10 @@
 import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { Router } from '@angular/router';
 import { fromEvent, forkJoin } from 'rxjs';
 import { map, debounceTime, tap, finalize } from 'rxjs/operators';
@@ -17,7 +22,7 @@ import {
   IEstado,
   IMunicipio,
   IBairro,
-  IGenero
+  IGenero,
 } from '@100lixo-lib/ngx-domain';
 import { ViacepAPI, ClienteAPI } from '@100lixo-lib/ngx-api';
 import { NgxCryptoService, NgxParamsService } from '@100lixo-lib/ngx-service';
@@ -26,13 +31,12 @@ import { NgxLoadingService } from '@100lixo-lib/ngx-component';
 @Component({
   selector: 'app-sign-up',
   templateUrl: './sign-up.component.html',
-  styleUrls: ['./sign-up.component.scss']
+  styleUrls: ['./sign-up.component.scss'],
 })
 export class SignUpComponent implements OnInit {
-
   @Input() isLinear = true;
   @Input() isEditable = true;
-  @ViewChild("cep") cepInput!: ElementRef;
+  @ViewChild('cep') cepInput!: ElementRef;
 
   public contentLoaded = false;
   public isCategoria: boolean = false;
@@ -80,33 +84,76 @@ export class SignUpComponent implements OnInit {
   ) {
     this.form = this._formBuilder.group({
       step1: this._formBuilder.group({
-        tipo_cliente: new FormControl('', [Validators.required])
+        tipo_cliente: new FormControl('', [Validators.required]),
       }),
       step2: this._formBuilder.group({
-        nome: new FormControl('', [Validators.required, Validators.maxLength(100)]),
-        documento: new FormControl('', [Validators.required, Validators.maxLength(18)]),
-        ultimos_digitos_documento: new FormControl('', [Validators.required, Validators.maxLength(2)]),
+        nome: new FormControl('', [
+          Validators.required,
+          Validators.maxLength(100),
+        ]),
+        documento: new FormControl('', [
+          Validators.required,
+          Validators.maxLength(18),
+        ]),
+        ultimos_digitos_documento: new FormControl('', [
+          Validators.required,
+          Validators.maxLength(2),
+        ]),
         data_nascimento: new FormControl(''),
-        ddd: new FormControl('', [Validators.required, Validators.maxLength(2)]),
-        telefone: new FormControl('', [Validators.required, Validators.maxLength(10)]),
-        email: new FormControl('', [Validators.email, Validators.required, Validators.maxLength(100)]),
-        categoria: new FormControl('', [Validators.required]),
-        genero: new FormControl('')
+        ddd: new FormControl('', [
+          Validators.required,
+          Validators.maxLength(2),
+        ]),
+        telefone: new FormControl('', [
+          Validators.required,
+          Validators.maxLength(10),
+        ]),
+        email: new FormControl('', [
+          Validators.email,
+          Validators.required,
+          Validators.maxLength(100),
+        ]),
+        categoria: new FormControl(''),
+        genero: new FormControl(''),
       }),
       step3: this._formBuilder.group({
-        cep: new FormControl('', [Validators.required, Validators.maxLength(9)]),
+        cep: new FormControl('', [
+          Validators.required,
+          Validators.maxLength(9),
+        ]),
         sindico: new FormControl(false, [Validators.required]),
-        tipo_logradouro: new FormControl('', [Validators.required, Validators.maxLength(50)]),
-        logradouro: new FormControl('', [Validators.required, Validators.maxLength(255)]),
-        bairro: new FormControl('', [Validators.required, Validators.maxLength(100)]),
-        municipio: new FormControl('', [Validators.required, Validators.maxLength(100)]),
-        estado: new FormControl('', [Validators.required, Validators.maxLength(2)]),
-        tipo_endereco: new FormControl('', [Validators.required, Validators.maxLength(9)]),
-        numero_endereco: new FormControl('', [Validators.required, Validators.maxLength(9)]),
+        tipo_logradouro: new FormControl('', [
+          Validators.required,
+          Validators.maxLength(50),
+        ]),
+        logradouro: new FormControl('', [
+          Validators.required,
+          Validators.maxLength(255),
+        ]),
+        bairro: new FormControl('', [
+          Validators.required,
+          Validators.maxLength(100),
+        ]),
+        municipio: new FormControl('', [
+          Validators.required,
+          Validators.maxLength(100),
+        ]),
+        estado: new FormControl('', [
+          Validators.required,
+          Validators.maxLength(2),
+        ]),
+        tipo_endereco: new FormControl('', [
+          Validators.required,
+          Validators.maxLength(9),
+        ]),
+        numero_endereco: new FormControl('', [
+          Validators.required,
+          Validators.maxLength(9),
+        ]),
         complemento_endereco: new FormControl('', [Validators.maxLength(50)]),
         quantidade_unidades: new FormControl('', [Validators.maxLength(9999)]),
-        termo_responsabilidade: new FormControl('', [Validators.required])
-      })
+        termo_responsabilidade: new FormControl('', [Validators.required]),
+      }),
     });
   }
 
@@ -119,34 +166,40 @@ export class SignUpComponent implements OnInit {
       tiposEndereco: this._paramsService.getTipoEndereco(),
       tiposLogradouro: this._paramsService.getTipoLogradouro(),
       estados: this._paramsService.getEstado(),
-      generos: this._paramsService.getGenero()
+      generos: this._paramsService.getGenero(),
     })
-    .pipe(finalize(() => this._loadingService.destroy(loading)))
-    .subscribe(response => {
-      this.statusList = response.status;
-      this.categoriaList = response.categorias;
-      this.tipoEnderecoList = response.tiposEndereco;
-      this.tipoLogradouroList = response.tiposLogradouro;
-      this.estadoList = response.estados;
-      this.generoList = response.generos;
-      this.contentLoaded = false;
-    });
+      .pipe(finalize(() => this._loadingService.destroy(loading)))
+      .subscribe((response) => {
+        this.statusList = response.status;
+        this.categoriaList = response.categorias;
+        this.tipoEnderecoList = response.tiposEndereco;
+        this.tipoLogradouroList = response.tiposLogradouro;
+        this.estadoList = response.estados;
+        this.generoList = response.generos;
+        this.contentLoaded = false;
+      });
   }
 
   getLastTwoNumbersFromDocumentAndValidate(value: string): void {
     if (this.tipoCliente == 'PF') {
       if (cpf.isValid(value)) {
-        this.form.get('step2')?.get('ultimos_digitos_documento')?.setValue(value.slice(-2));
+        this.form
+          .get('step2')
+          ?.get('ultimos_digitos_documento')
+          ?.setValue(value.slice(-2));
         this.form.get('step2')?.get('documento')?.setErrors(null);
       } else {
-        this.form.get('step2')?.get('documento')?.setErrors({invalid: true});
+        this.form.get('step2')?.get('documento')?.setErrors({ invalid: true });
       }
     } else {
       if (cnpj.isValid(value)) {
-        this.form.get('step2')?.get('ultimos_digitos_documento')?.setValue(value.slice(-2));
+        this.form
+          .get('step2')
+          ?.get('ultimos_digitos_documento')
+          ?.setValue(value.slice(-2));
         this.form.get('step2')?.get('documento')?.setErrors(null);
       } else {
-        this.form.get('step2')?.get('documento')?.setErrors({invalid: true});
+        this.form.get('step2')?.get('documento')?.setErrors({ invalid: true });
       }
     }
   }
@@ -156,16 +209,17 @@ export class SignUpComponent implements OnInit {
       .pipe(
         map((event: any) => event.target.value),
         debounceTime(1500),
-        tap(() => this.contentLoaded = false)
+        tap(() => (this.contentLoaded = false))
       )
       .subscribe((item: string) => {
-        this._viacepApi.getCep(item.replace('-', ''))
+        this._viacepApi
+          .getCep(item.replace('-', ''))
           .subscribe((cep: IViacep) => {
             if (!cep?.localidade?.match(/Suzano/g)) {
               Swal.fire({
                 title: 'Desculpe!',
                 text: 'O CEP informado não é atendido pela nossa Cooperativa',
-                icon: 'error'
+                icon: 'error',
               });
             } else {
               this.contentLoaded = true;
@@ -177,7 +231,9 @@ export class SignUpComponent implements OnInit {
   }
 
   checkTipoEndereco(event: any): void {
-    this.tipoEndereco = this.tipoEnderecoList.filter(item => item.id == event.target.value)[0];
+    this.tipoEndereco = this.tipoEnderecoList.filter(
+      (item) => item.id == event.target.value
+    )[0];
   }
 
   defineTypePerson(): void {
@@ -185,14 +241,24 @@ export class SignUpComponent implements OnInit {
       this.labelDocumento = 'CPF';
       this.documentMask = '000.000.000-00';
       this.isCategoria = false;
-      this.form.get('step2')?.get('categoria')?.setValue(this.categoriaList.filter(item => item.descricao.includes('aplica'))[0].id);
+      this.form
+        .get('step2')
+        ?.get('categoria')
+        ?.setValue(
+          this.categoriaList.filter((item) =>
+            item.descricao.includes('aplica')
+          )[0].id
+        );
       this.form.get('step2')?.get('categoria')?.setValidators(null);
       this.form.get('step2')?.updateValueAndValidity();
     } else {
       this.labelDocumento = 'CNPJ';
       this.documentMask = '00.000.000/0000-00';
       this.isCategoria = true;
-      this.form.get('step2')?.get('categoria')?.setValidators(Validators.required);
+      this.form
+        .get('step2')
+        ?.get('categoria')
+        ?.setValidators(Validators.required);
       this.form.get('step2')?.updateValueAndValidity();
     }
   }
@@ -204,25 +270,37 @@ export class SignUpComponent implements OnInit {
     step3?.get('estado')?.setValue(this.cepSearched.uf);
     step3?.get('logradouro')?.setValue(this.cepSearched.logradouro);
 
-    this.tipoLogradouro = this.tipoLogradouroList.filter(item => this.cepSearched.logradouro.includes(item.nome))[0];
+    this.tipoLogradouro = this.tipoLogradouroList.filter((item) =>
+      this.cepSearched.logradouro.includes(item.nome)
+    )[0];
     step3?.get('tipo_logradouro')?.setValue(this.tipoLogradouro);
     step3?.updateValueAndValidity();
   }
 
   private retrieveObjectsToPost(): void {
-    this.categoria = this.categoriaList.filter(item => item.id == this.form.get('step2')?.get('categoria')?.value)[0];
-    this.status = this.statusList.filter(item => item.descricao.toLowerCase() == 'novo')[0];
-    this.estado = this.estadoList.filter(item => item.sigla == this.form.get('step3')?.get('estado')?.value)[0];
-    this.tipoEndereco = this.tipoEnderecoList.filter(item => item.id == this.form.get('step3')?.get('tipo_endereco')?.value)[0];
+    this.categoria = this.categoriaList.filter(
+      (item) => item.id == this.form.get('step2')?.get('categoria')?.value
+    )[0];
+    this.status = this.statusList.filter(
+      (item) => item.descricao.toLowerCase() == 'novo'
+    )[0];
+    this.estado = this.estadoList.filter(
+      (item) => item.sigla == this.form.get('step3')?.get('estado')?.value
+    )[0];
+    this.tipoEndereco = this.tipoEnderecoList.filter(
+      (item) => item.id == this.form.get('step3')?.get('tipo_endereco')?.value
+    )[0];
 
     if (this.form.get('step2')?.get('genero')?.value) {
-      this.genero = this.generoList.filter(item => item.id == this.form.get('step2')?.get('genero')?.value)[0];
+      this.genero = this.generoList.filter(
+        (item) => item.id == this.form.get('step2')?.get('genero')?.value
+      )[0];
     }
 
     this.municipio = {
       id: 1,
       nome: this.form.get('step3')?.get('municipio')?.value,
-      estado: this.estado
+      estado: this.estado,
     } as IMunicipio;
 
     this.bairro = {
@@ -234,7 +312,7 @@ export class SignUpComponent implements OnInit {
     this.logradouro = {
       nome: this.form.get('step3')?.get('logradouro')?.value,
       tipoLogradouro: this.tipoLogradouro,
-      bairro: this.bairro
+      bairro: this.bairro,
     } as ILogradouro;
   }
 
@@ -246,9 +324,14 @@ export class SignUpComponent implements OnInit {
       const entity = {
         tipoCliente: this.form.get('step1')?.get('tipo_cliente')?.value,
         nome: this.form.get('step2')?.get('nome')?.value,
-        documento: this._cryptoService.encrypt(this.form.get('step2')?.get('documento')?.value),
-        ultimosDigitosDocumento: parseInt(this.form.get('step2')?.get('ultimos_digitos_documento')?.value),
-        dataNascimento: this.form.get('step2')?.get('data_nascimento')?.value || null,
+        documento: this._cryptoService.encrypt(
+          this.form.get('step2')?.get('documento')?.value
+        ),
+        ultimosDigitosDocumento: parseInt(
+          this.form.get('step2')?.get('ultimos_digitos_documento')?.value
+        ),
+        dataNascimento:
+          this.form.get('step2')?.get('data_nascimento')?.value || null,
         genero: this.genero || null,
         ddd: parseInt(this.form.get('step2')?.get('ddd')?.value),
         telefone: this.form.get('step2')?.get('telefone')?.value,
@@ -257,34 +340,39 @@ export class SignUpComponent implements OnInit {
         cep: this.form.get('step3')?.get('cep')?.value,
         tipoEndereco: this.tipoEndereco,
         logradouro: this.logradouro,
-        numeroEndereco: parseInt(this.form.get('step3')?.get('numero_endereco')?.value),
-        complementoEndereco: this.form.get('step3')?.get('complemento_endereco')?.value,
-        quantidadeUnidades: parseInt(this.form.get('step3')?.get('quantidade_unidade')?.value),
+        numeroEndereco: parseInt(
+          this.form.get('step3')?.get('numero_endereco')?.value
+        ),
+        complementoEndereco: this.form.get('step3')?.get('complemento_endereco')
+          ?.value,
+        quantidadeUnidades: parseInt(
+          this.form.get('step3')?.get('quantidade_unidade')?.value
+        ),
         sindico: this.form.get('step3')?.get('sindico')?.value,
-        status: this.status
+        status: this.status,
       } as ICliente;
 
-      this._clienteApi.create(entity)
+      this._clienteApi
+        .create(entity)
         .pipe(finalize(() => this._loadingService.destroy(loading)))
         .subscribe(
-          res => {
+          (res) => {
             Swal.fire({
               title: 'Cadastro realizado!',
               text: 'Seu cadastro foi realizado, agora, aguarde o nosso contato.',
-              icon: 'success'
+              icon: 'success',
             }).then((result) => {
               this._router.navigate(['/']);
             });
           },
-          err => {
+          (err) => {
             Swal.fire({
               title: 'Erro ao cadastrar!',
               text: err.message,
-              icon: 'error'
+              icon: 'error',
             });
           }
         );
     }
   }
-
 }
